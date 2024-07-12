@@ -40,13 +40,13 @@ export default function Home() {
   return (
     <div className="">
       <Head>
-        <title>Kittos </title>
+        <title>DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
 
       <div className="bg-[#1242ef] absolute left-[-250px] top-[-210px] h-[352px] w-[652px] blur-[350px] rounded-full "></div>
 
-      {isWalletConnected ||  addr ? <Header /> : null}
+      {isWalletConnected || addr ? <Header /> : null}
 
       <div className="relative overflow-hidden">
         {/* HeroSection */}
@@ -56,7 +56,7 @@ export default function Home() {
               Discover New Era of <br /> Crypto Currencies
             </h1>
             <p className="text-[#ADB9C7] sm:text-center">
-              Kittos is the primier marketplace for NFT, which are digital items
+              DesiNFT is the primier marketplace for NFT, which are digital items
               you can truly own. Digital items have existed for a long time, but
               never like this.
             </p>
@@ -88,22 +88,24 @@ export default function Home() {
                 layout="intrinsic"
               ></Image>
               <div className="">
-                <h1>Hamlet</h1>
+                <h1>Krishna</h1>
                 <div className="h-[56px] flex justify-between">
                   <div className="flex flex-row gap-2">
                     <img
-                      src="images/mockcreator.jpg"
+                      src="https://pbs.twimg.com/profile_images/1538236414885781506/sizXC1Ft_400x400.jpg"
                       alt="creator-image"
                       className="h-[56px] w-[56px] rounded-xl"
                     />
                     <div>
-                      <p className="my-1 text-base text-[#8F9CA9]">Creator </p>
-                      <h4 className="my-0">0x000...0000</h4>
+                      <p className="my-1 text-base text-[#8F9CA9]">
+                        Prakruti Thakor
+                      </p>
+                      <h4 className="my-0">0xCF9a...dbEc</h4>
                     </div>
                   </div>
                   <div>
                     <p className="my-1 text-[#8F9CA9]">Current Price</p>
-                    <h4 className="my-0 ">4.99 ETH</h4>
+                    <h4 className="my-0 ">0.99 ETH</h4>
                   </div>
                 </div>
               </div>

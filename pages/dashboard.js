@@ -76,7 +76,7 @@ const Dashboard = () => {
     <div className="relative ">
       {" "}
       <Head>
-        <title>Dashboard || Kittos</title>
+        <title>Dashboard || DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
       <Header />

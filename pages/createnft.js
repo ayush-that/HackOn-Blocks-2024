@@ -160,13 +160,13 @@ const Create = () => {
   return (
     <div className="font-body">
       <Head>
-        <title>Create NFT || Kittos </title>
+        <title>Create NFT || DesiNFT </title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
 
       <Header />
 
-      <h1 className="text-center">Kittos Create NFT</h1>
+      <h1 className="text-center">DesiNFT Create NFT</h1>
 
       <div className="relative overflow-hidden">
         <section className="max-w-[1024px] my-20 mx-auto grid grid-cols-2  gap-10 font-body  overflow-hidden top-7 md:gap-10 medium md:px-5 sm:grid-cols-1 sm:h-full relative ">
@@ -203,7 +203,7 @@ const Create = () => {
             <div className="flex flex-col">
               <label className="text-2xl my-1 font-semibold ">Name</label>
               <input
-                placeholder="eg.Kittos ka"
+                placeholder="eg.DesiNFT ka"
                 className="px-5 py-3 rounded-xl
                placeholder:text-slate-400 outline-none border-none  bg-[#272D37]/60 placeholder:font-body font-body"
                 value={nftDetails.name}
@@ -216,7 +216,7 @@ const Create = () => {
             <div className="flex flex-col">
               <label className="text-2xl my-1 font-semibold">Description</label>
               <textarea
-                placeholder="eg.Kittos ka"
+                placeholder="eg.DesiNFT ka"
                 className="px-5 py-3 rounded-lg placeholder:text-slate-400 bg-[#272D37]/60 border-none outline-none placeholder:font-body tx font-body"
                 value={nftDetails.description}
                 onChange={(e) =>

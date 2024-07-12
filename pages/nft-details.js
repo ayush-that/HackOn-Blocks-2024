@@ -73,7 +73,7 @@ const NFTDetails = () => {
   return (
     <div>
       <Head>
-        <title>{nft.name} || Kittos</title>
+        <title>{nft.name} || DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
 

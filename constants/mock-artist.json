@@ -1,30 +1,30 @@
 [
   {
     "id": 1,
-    "name": "Bored Ape Yacht",
+    "name": "Khamaj - The night Raga",
     "bgImage": "/images/placeholder1.png",
     "image": "/images/main1.png",
-    "price": "378.7K"
+    "price": "37.7K"
   },
   {
     "id": 2,
-    "name": "CryptoPunks",
+    "name": "Ecotherapy",
     "bgImage": "/images/placeholder2.png",
     "image": "/images/main2.png",
-    "price": "818.7K"
+    "price": "87.1K"
   },
   {
     "id": 3,
-    "name": "Doodles",
+    "name": "Yuzen Sarees",
     "bgImage": "/images/placeholder3.png",
     "image": "/images/main3.png",
-    "price": "74.9K "
+    "price": "79.4K "
   },
   {
     "id": 4,
-    "name": "Capsule House",
+    "name": "Toy Faces",
     "bgImage": "/images/placeholder4.png",
     "image": "/images/main4.png",
-    "price": "19.3K"
+    "price": "13.9K"
   }
 ]

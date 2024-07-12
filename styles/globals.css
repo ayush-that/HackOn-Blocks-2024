@@ -8,8 +8,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Poppins";
 }
 
 a {
@@ -28,7 +27,12 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: linear-gradient(
+      138.18deg,
+      #110000 -7.24%,
+      #000000 48.68%,
+      #000800 105.61%
+    );
   }
 }
 

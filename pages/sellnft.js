@@ -80,7 +80,7 @@ const SellNft = () => {
   return (
     <div className="relative ">
       <Head>
-        <title> Sell Token || Kittos </title>
+        <title> Sell Token || DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
       <Header />

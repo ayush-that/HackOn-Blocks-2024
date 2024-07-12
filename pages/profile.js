@@ -74,7 +74,7 @@ const Profile = () => {
   return (
     <div className="relative  ">
       <Head>
-        <title> My Profile || Kittos </title>
+        <title> My Profile || DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
       <Header />
