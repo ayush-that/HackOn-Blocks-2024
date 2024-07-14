@@ -10,9 +10,17 @@
 
 ### Screenshots
 
-<p align="center">
-<img src="https://github.com/user-attachments/assets/082348fd-7090-4bd1-baf8-0cc00917aecd"> <img src="https://github.com/user-attachments/assets/04000949-232b-48f2-bb6c-4abcef498ae6">
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/ba1a71f1-121a-46d5-8104-87c4741e7a56">
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/04000949-232b-48f2-bb6c-4abcef498ae6">
+    </td>
+  </tr>
+</table>
+
 
 ### Installing 
 
