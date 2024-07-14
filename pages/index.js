@@ -56,9 +56,9 @@ export default function Home() {
               Discover New Era of <br /> Crypto Currencies
             </h1>
             <p className="text-[#ADB9C7] sm:text-center">
-              DesiNFT is the primier marketplace for NFT, which are digital items
-              you can truly own. Digital items have existed for a long time, but
-              never like this.
+              DesiNFT is the premier marketplace for NFT, which are digital
+              items you can truly own. Digital items have existed for a long
+              time, but never like this.
             </p>
             {addr ? (
               <button
