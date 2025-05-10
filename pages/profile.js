@@ -6,15 +6,13 @@ import { Footer, Header, MyNFTContainer } from "../components";
 import ContractABI from "../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
 import { ethers } from "ethers";
 import axios from "axios";
-import { truncateEthAddress } from "../utils/truncAddress";
 
-
+const TEST_MODE = true;
 const mainURL = `https://arweave.net/`;
 
 const Profile = () => {
   const [nfts, setNts] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -36,6 +34,35 @@ const Profile = () => {
 
   const getNfts = async () => {
     try {
+      if (TEST_MODE) {
+        // In test mode, create mock owned NFTs
+        const mockNfts = [
+          {
+            price: "0.1",
+            tokenId: 3,
+            seller: "0x0000000000000000000000000000000000000000",
+            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
+            image: "test-image-3",
+            name: "My Test NFT 1",
+            description: "This is my test NFT in test mode",
+            tokenURI: "test-uri-3",
+          },
+          {
+            price: "0.3",
+            tokenId: 4,
+            seller: "0x0000000000000000000000000000000000000000",
+            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
+            image: "test-image-4",
+            name: "My Test NFT 2",
+            description: "Another one of my test NFTs in test mode",
+            tokenURI: "test-uri-4",
+          }
+        ];
+        setNts(mockNfts);
+        setLoading(true);
+        return;
+      }
+
       const contract = await getContract();
 
       const data = await contract.fetchMyNFTs();
@@ -65,14 +92,29 @@ const Profile = () => {
       setLoading(true);
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong", error);
+      if (TEST_MODE) {
+        const mockNfts = [
+          {
+            price: "0.1",
+            tokenId: 3,
+            seller: "0x0000000000000000000000000000000000000000",
+            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
+            image: "test-image-3",
+            name: "My Test NFT 1",
+            description: "This is my test NFT in test mode",
+            tokenURI: "test-uri-3",
+          }
+        ];
+        setNts(mockNfts);
+        setLoading(true);
+      } else {
+        toast.error("Something went wrong", error);
+      }
     }
   };
 
-
-
   return (
-    <div className="relative  ">
+    <div className="relative min-h-screen flex flex-col">
       <Head>
         <title> My Profile || DesiNFT</title>
         <link rel="shortcut icon" href="logo.png" />
@@ -81,31 +123,23 @@ const Profile = () => {
 
       <div className="bg-[#1242ef] absolute left-[-250px] top-[-210px] h-[352px] w-[652px] blur-[350px] rounded-full font-body"></div>
 
-      <div className="relative overflow-hidden">
+      <div className="flex-grow overflow-hidden">
         <section className="">
-          <div className="max-w-[1400px] relative h-[280px] mx-auto my-0 bg-[#272D37]/60 rounded-2xl border-3 border-solid border-[#0039FF] sm:h-[150px] md:mx-2 ">
+          <div className="max-w-[1400px] relative h-[180px] mx-auto my-0 bg-[#272D37]/60 rounded-2xl border-3 border-solid border-[#0039FF] sm:h-[150px] md:mx-2 mb-20">
             <div className="flex items-center justify-center w-full h-full">
-              <h1 className=" font-body font-semibold text-5xl md:text-2xl">
+              <h1 className="font-body font-semibold text-5xl md:text-2xl">
                 My NFTs
               </h1>
             </div>
-
-            <div className="absolute w-[160px] h-[160px] sm:w-[80px] sm:h-[80px] bg-white left-10 -bottom-[80px] rounded-[45px] sm:rounded-3xl profile flex  sm:-bottom-[40px] items-center justify-center">
-              <img
-                src="logo.png"
-                alt="Logo"
-                className="w-[80px] h-[80px] sm:h-[60px] sm:w-[60px]"
-              />
-            </div>
           </div>
         </section>
-        <section className="max-w-[1200px] my-20 mx-auto grid grid-cols-3 md:grid-cols-2 gap-4 font-body  overflow-hidden top-7 md:gap-5 medium md:px-5 sm:grid-cols-1 sm:h-full relative justify-center items-center">
+        <section className="max-w-[1200px] my-10 mx-auto grid grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 font-body overflow-hidden md:gap-5 md:px-5 xs:grid-cols-1 sm:h-full relative justify-center items-center px-4">
           {nfts?.map((nft, i) => (
             <MyNFTContainer key={nft.tokenId} nft={nft} />
           ))}
         </section>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

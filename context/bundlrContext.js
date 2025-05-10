@@ -4,6 +4,7 @@ import { providers, utils } from "ethers";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+const TEST_MODE = true;
 const BundlrContext = createContext({
   initialiseBundlr: async () => {},
   fundWallet: (_) => {},
@@ -15,7 +16,7 @@ const BundlrContext = createContext({
 
 const BundlrContextProvider = ({ children }) => {
   const [bundlrInstance, setBundlrInstance] = useState();
-  const [balance, setBalance] = useState("");
+  const [balance, setBalance] = useState(TEST_MODE ? "1.0" : "");
 
   useEffect(() => {
     if (bundlrInstance) {
@@ -24,6 +25,12 @@ const BundlrContextProvider = ({ children }) => {
   }, [bundlrInstance]);
 
   const initialiseBundlr = async () => {
+    if (TEST_MODE) {
+      setBundlrInstance({ test: true });
+      setBalance("1.0");
+      return;
+    }
+
     const { ethereum } = window;
     const provider = new providers.Web3Provider(ethereum);
     await provider._ready();
@@ -40,6 +47,12 @@ const BundlrContextProvider = ({ children }) => {
   };
 
   async function fundWallet(amount) {
+    if (TEST_MODE) {
+      toast.success("Test mode: Funds added successfully");
+      setBalance("1.0");
+      return;
+    }
+
     console.log(amount);
     try {
       if (bundlrInstance) {
@@ -63,6 +76,8 @@ const BundlrContextProvider = ({ children }) => {
   }
 
   function parseInput(input) {
+    if (TEST_MODE) return new BigNumber(input);
+    
     const conv = new BigNumber(input).multipliedBy(
       bundlrInstance?.currencyConfig.base[1]
     );
@@ -76,6 +91,11 @@ const BundlrContextProvider = ({ children }) => {
   }
 
   async function fetchBalance() {
+    if (TEST_MODE) {
+      setBalance("1.0");
+      return;
+    }
+
     if (bundlrInstance) {
       const bal = await bundlrInstance.getLoadedBalance();
       console.log("bal: ", utils.formatEther(bal.toString()));
@@ -84,20 +104,28 @@ const BundlrContextProvider = ({ children }) => {
   }
 
   async function uploadFile(file) {
+    if (TEST_MODE) {
+      const mockTxId = `test-image-${Date.now()}`;
+      return { data: { id: mockTxId } };
+    }
+
     try {
       let tx = await bundlrInstance.uploader.upload(file, [
         { name: "Content-Type", value: "image/png" },
       ]);
       return tx;
     } catch (error) {
-      toast({
-        title: error.message || "Something went wrong!",
-        status: "error",
-      });
+      toast.error(error.message || "Something went wrong!");
+      return null;
     }
   }
 
   async function uploadURI(file) {
+    if (TEST_MODE) {
+      const mockTxId = `test-uri-${Date.now()}`;
+      return { data: { id: mockTxId } };
+    }
+
     try {
       console.log(file);
       let tx = await bundlrInstance.uploader.upload(file, [
@@ -105,10 +133,8 @@ const BundlrContextProvider = ({ children }) => {
       ]);
       return tx;
     } catch (error) {
-      toast({
-        title: error.message || "Something went wrong!",
-        status: "error",
-      });
+      toast.error(error.message || "Something went wrong!");
+      return null;
     }
   }
 

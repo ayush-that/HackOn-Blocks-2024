@@ -3,7 +3,7 @@ import { useBundler } from "../context/bundlrContext";
 
 const FundWallet = () => {
   const { fundWallet, balance } = useBundler();
-  const [value, setValue] = React.useState("0.02");
+  const [value, setValue] = React.useState("0.005");
 
   return (
     <div className="font-body">

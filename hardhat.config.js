@@ -6,7 +6,7 @@ module.exports = {
   solidity: "0.8.16",
   networks: {
     zkEVM: {
-      url: process.env.URL,
+      url: "https://rpc.cardona.zkevm-rpc.com",
       accounts: [process.env.PRIVATE_KEY],
     },
   },
