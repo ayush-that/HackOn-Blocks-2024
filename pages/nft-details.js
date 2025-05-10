@@ -1,14 +1,14 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { Footer, Header } from "../components";
-import { truncateEthAddress } from "../utils/truncAddress";
-import ContractABI from "../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
-import { toast } from "react-toastify";
-import { ethers } from "ethers";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Footer, Header } from '../components';
+import { truncateEthAddress } from '../utils/truncAddress';
+import ContractABI from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import { toast } from 'react-toastify';
+import { ethers } from 'ethers';
 
 const TEST_MODE = true;
-const DEFAULT_TEST_IMAGE = "/logo.png";
+const DEFAULT_TEST_IMAGE = '/logo.png';
 
 const mainURL = `https://arweave.net/`;
 
@@ -17,16 +17,16 @@ const NFTDetails = () => {
 
   const router = useRouter();
 
-  const [addr, setAddr] = useState("");
+  const [addr, setAddr] = useState('');
 
   const [nft, setNft] = useState({
-    price: "",
-    tokenId: "",
-    seller: "",
-    owner: "",
-    image: "",
-    description: "",
-    tokenURI: "",
+    price: '',
+    tokenId: '',
+    seller: '',
+    owner: '',
+    image: '',
+    description: '',
+    tokenURI: '',
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const NFTDetails = () => {
   }, [router.isReady]);
 
   useEffect(() => {
-    const addr = localStorage.getItem("walletAddress");
+    const addr = localStorage.getItem('walletAddress');
     setAddr(addr);
   }, []);
 
@@ -58,22 +58,22 @@ const NFTDetails = () => {
   const buyNft = async (n) => {
     try {
       if (TEST_MODE) {
-        toast.success("Test mode: NFT purchased successfully!");
-        await router.push("/dashboard");
+        toast.success('Test mode: NFT purchased successfully!');
+        await router.push('/dashboard');
         return;
       }
 
       const contract = await getContract();
-      const price = ethers.utils.parseUnits(n.price.toString(), "ether");
+      const price = ethers.utils.parseUnits(n.price.toString(), 'ether');
       let tx = await contract.createMarketSale(n.tokenId, { value: price });
       await tx.wait();
       toast.success(`Bought NFT🎉`);
-      await router.push("/dashboard");
+      await router.push('/dashboard');
     } catch (error) {
       console.log(error);
       if (TEST_MODE) {
-        toast.success("Test mode: NFT purchased successfully!");
-        await router.push("/dashboard");
+        toast.success('Test mode: NFT purchased successfully!');
+        await router.push('/dashboard');
       } else {
         toast.error(`You Can't Buy This Look At the Price 😂 ${error}`);
       }
@@ -120,7 +120,7 @@ const NFTDetails = () => {
               </h2>
             </div>
 
-            {nft.seller && nft.seller.startsWith("0x0") ? null : (
+            {nft.seller && nft.seller.startsWith('0x0') ? null : (
               <div>
                 <p>Seller </p>
                 <h2 className="my-0 ssm:text-sm text-transparent font-bold bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">
@@ -131,18 +131,16 @@ const NFTDetails = () => {
 
             <div>
               <p>Blockchain</p>
-              <h2>{TEST_MODE ? "Test Mode" : "Ethereum ⟠"}</h2>
+              <h2>{TEST_MODE ? 'Test Mode' : 'Ethereum ⟠'}</h2>
             </div>
 
             <button
               className="bg-[#1E50FF] outline-none border-none py-3 px-5 rounded-xl font-body cursor-pointer  duration-250 ease-in-out hover:transform-x-1 hover:drop-shadow-xl hover:shadow-sky-600 w-auto mt-8 transition transform hover:-translate-y-3 motion-reduce:transition-none motion-reduce:hover:transform-none "
               onClick={() => {
-                addr === nft.owner?.toLocaleLowerCase()
-                  ? reSellNFT(nft)
-                  : buyNft(nft);
+                addr === nft.owner?.toLocaleLowerCase() ? reSellNFT(nft) : buyNft(nft);
               }}
             >
-              {addr === nft.owner?.toLocaleLowerCase() ? "Sell NFT" : "Buy NFT"}
+              {addr === nft.owner?.toLocaleLowerCase() ? 'Sell NFT' : 'Buy NFT'}
             </button>
           </div>
         </section>

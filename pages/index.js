@@ -1,15 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
-import data from "../constants/mock-nft.json";
-import mockartist from "../constants/mock-artist.json";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Footer, Header } from "../components";
+import Head from 'next/head';
+import Image from 'next/image';
+import data from '../constants/mock-nft.json';
+import mockartist from '../constants/mock-artist.json';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Footer, Header } from '../components';
 
 export default function Home() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
-  const [addr, setAddr] = useState("");
+  const [addr, setAddr] = useState('');
 
   const router = useRouter();
 
@@ -18,22 +18,22 @@ export default function Home() {
       const { ethereum } = window;
 
       if (!ethereum) {
-        alert("Please Install MetaMask");
+        alert('Please Install MetaMask');
         return;
       }
       const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
       });
       setIsWalletConnected(true);
-      localStorage.setItem("walletAddress", accounts[0]);
-      router.push("/dashboard");
+      localStorage.setItem('walletAddress', accounts[0]);
+      router.push('/dashboard');
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    const addr = localStorage.getItem("walletAddress");
+    const addr = localStorage.getItem('walletAddress');
     setAddr(addr);
   }, []);
 
@@ -56,9 +56,8 @@ export default function Home() {
               Discover New Era of <br /> Crypto Currencies
             </h1>
             <p className="text-[#ADB9C7] sm:text-center">
-              DesiNFT is the premier marketplace for NFT, which are digital
-              items you can truly own. Digital items have existed for a long
-              time, but never like this.
+              DesiNFT is the premier marketplace for NFT, which are digital items you can truly own.
+              Digital items have existed for a long time, but never like this.
             </p>
             {addr ? (
               <button
@@ -97,9 +96,7 @@ export default function Home() {
                       className="h-[56px] w-[56px] rounded-xl"
                     />
                     <div>
-                      <p className="my-1 text-base text-[#8F9CA9]">
-                        Prakruti Thakor
-                      </p>
+                      <p className="my-1 text-base text-[#8F9CA9]">Prakruti Thakor</p>
                       <h4 className="my-0">0xCF9a...dbEc</h4>
                     </div>
                   </div>
@@ -116,25 +113,17 @@ export default function Home() {
         <section className="max-w-[1240px] my-20 mx-auto  gap-2 font-body top-7 ">
           <h1 className="text-center w-full">Create and sell your NFTs</h1>
 
-          <div className="grid grid-cols-3 gap-5 sm:grid-cols-1 sm:p-12 md:grid-cols-1 md:mx-10">
+          <div className="grid grid-cols-3 gap-5 sm:grid-cols-1 sm:p-4 md:grid-cols-1 md:mx-5 sm:mx-2">
             {data.map((item) => (
               <div
                 key={item.id}
                 className="w-full bg-[#272D37] flex flex-col justify-center items-center p-3 rounded-xl"
               >
-                <div className="w-[80px] h-[80px] flex  justify-center items-center ">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full"
-                  />
+                <div className="w-[80px] mt-3 h-[80px] flex  justify-center items-center ">
+                  <img src={item.image} alt={item.title} className="w-full h-full" />
                 </div>
-                <h4 className="font-bold text-[24px] md:text-[14px]">
-                  {item.title}
-                </h4>
-                <p className="text-center text-[#ADB9C7] text-[14px]">
-                  {item.description}
-                </p>
+                <h4 className="font-bold text-[24px] md:text-[14px]">{item.title}</h4>
+                <p className="text-center text-[#ADB9C7] text-[14px]">{item.description}</p>
               </div>
             ))}
           </div>
@@ -142,7 +131,7 @@ export default function Home() {
 
         <section className="max-w-[1240px] my-20 mx-auto  gap-2 font-body top-7 ">
           <h2 className="sm:text-center md:mx-10">Featured Artist </h2>
-          <div className="grid grid-cols-4 gap-3 sm:gap-y-8 md:grid-cols-2 sm:grid-cols-1 sm:p-12 md:mx-10">
+          <div className="grid grid-cols-4 gap-3 sm:gap-y-8 md:grid-cols-2 sm:grid-cols-1 sm:p-4 md:mx-5 sm:mx-2">
             {mockartist.map((data) => (
               <div
                 key={data.id}
@@ -176,9 +165,8 @@ export default function Home() {
           <div>
             <h1 className="text-4xl sm:text-2xl">Create Your Own NFT!</h1>
             <p className="text-[#ADB9C7] px-[120px] sm:p-2 ms:p-1">
-              We have a large scale group to support each other in this game,
-              Join us to get the news as soon as possible and follow our latest
-              announcements!
+              We have a large scale group to support each other in this game, Join us to get the
+              news as soon as possible and follow our latest announcements!
             </p>
             <button className="bg-[#1E50FF] outline-none border-none py-3 px-5 rounded-xl font-body cursor-pointer transition duration-250 ease-in-out hover:scale-125 hover:drop-shadow-xl hover:shadow-sky-600 w-auto  ">
               Join Community Now

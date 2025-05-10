@@ -1,14 +1,14 @@
-import { WebBundlr } from "@bundlr-network/client";
-import BigNumber from "bignumber.js";
-import { providers, utils } from "ethers";
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { WebBundlr } from '@bundlr-network/client';
+import BigNumber from 'bignumber.js';
+import { providers, utils } from 'ethers';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const TEST_MODE = true;
 const BundlrContext = createContext({
   initialiseBundlr: async () => {},
   fundWallet: (_) => {},
-  balance: "",
+  balance: '',
   uploadFile: async (_file) => {},
   uploadURI: async (_file) => {},
   bundlrInstance: null,
@@ -16,7 +16,7 @@ const BundlrContext = createContext({
 
 const BundlrContextProvider = ({ children }) => {
   const [bundlrInstance, setBundlrInstance] = useState();
-  const [balance, setBalance] = useState(TEST_MODE ? "1.0" : "");
+  const [balance, setBalance] = useState(TEST_MODE ? '1.0' : '');
 
   useEffect(() => {
     if (bundlrInstance) {
@@ -27,29 +27,24 @@ const BundlrContextProvider = ({ children }) => {
   const initialiseBundlr = async () => {
     if (TEST_MODE) {
       setBundlrInstance({ test: true });
-      setBalance("1.0");
+      setBalance('1.0');
       return;
     }
 
     const { ethereum } = window;
     const provider = new providers.Web3Provider(ethereum);
     await provider._ready();
-    const bundlr = new WebBundlr(
-      "https://devnet.bundlr.network",
-      "matic",
-      provider,
-      {
-        providerUrl: process.env.NEXT_PUBLIC_RPC_URL,
-      }
-    );
+    const bundlr = new WebBundlr('https://devnet.bundlr.network', 'matic', provider, {
+      providerUrl: process.env.NEXT_PUBLIC_RPC_URL,
+    });
     await bundlr.ready();
     setBundlrInstance(bundlr);
   };
 
   async function fundWallet(amount) {
     if (TEST_MODE) {
-      toast.success("Test mode: Funds added successfully");
-      setBalance("1.0");
+      toast.success('Test mode: Funds added successfully');
+      setBalance('1.0');
       return;
     }
 
@@ -61,29 +56,27 @@ const BundlrContextProvider = ({ children }) => {
         const amountParsed = parseInput(amount);
         console.log(amountParsed);
         if (amountParsed) {
-          toast.info("Adding funds please wait", { progress: 1 });
-          console.log("Adding...");
+          toast.info('Adding funds please wait', { progress: 1 });
+          console.log('Adding...');
           let response = await bundlrInstance.fund(amountParsed);
-          console.log("Wallet funded: ", response);
-          toast.success("Funds added", { progress: 1 });
+          console.log('Wallet funded: ', response);
+          toast.success('Funds added', { progress: 1 });
         }
         fetchBalance();
       }
     } catch (error) {
-      console.log("error", error);
-      toast.error(error.message || "Something went wrong!");
+      console.log('error', error);
+      toast.error(error.message || 'Something went wrong!');
     }
   }
 
   function parseInput(input) {
     if (TEST_MODE) return new BigNumber(input);
-    
-    const conv = new BigNumber(input).multipliedBy(
-      bundlrInstance?.currencyConfig.base[1]
-    );
+
+    const conv = new BigNumber(input).multipliedBy(bundlrInstance?.currencyConfig.base[1]);
     if (conv.isLessThan(1)) {
-      console.log("error: value too small");
-      toast.error("Error: value too small");
+      console.log('error: value too small');
+      toast.error('Error: value too small');
       return;
     } else {
       return conv;
@@ -92,13 +85,13 @@ const BundlrContextProvider = ({ children }) => {
 
   async function fetchBalance() {
     if (TEST_MODE) {
-      setBalance("1.0");
+      setBalance('1.0');
       return;
     }
 
     if (bundlrInstance) {
       const bal = await bundlrInstance.getLoadedBalance();
-      console.log("bal: ", utils.formatEther(bal.toString()));
+      console.log('bal: ', utils.formatEther(bal.toString()));
       setBalance(utils.formatEther(bal.toString()));
     }
   }
@@ -111,11 +104,11 @@ const BundlrContextProvider = ({ children }) => {
 
     try {
       let tx = await bundlrInstance.uploader.upload(file, [
-        { name: "Content-Type", value: "image/png" },
+        { name: 'Content-Type', value: 'image/png' },
       ]);
       return tx;
     } catch (error) {
-      toast.error(error.message || "Something went wrong!");
+      toast.error(error.message || 'Something went wrong!');
       return null;
     }
   }
@@ -129,11 +122,11 @@ const BundlrContextProvider = ({ children }) => {
     try {
       console.log(file);
       let tx = await bundlrInstance.uploader.upload(file, [
-        { name: "Content-Type", value: "application/json" },
+        { name: 'Content-Type', value: 'application/json' },
       ]);
       return tx;
     } catch (error) {
-      toast.error(error.message || "Something went wrong!");
+      toast.error(error.message || 'Something went wrong!');
       return null;
     }
   }

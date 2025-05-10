@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { truncateEthAddress } from "../utils/truncAddress";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { truncateEthAddress } from '../utils/truncAddress';
 
 // Test mode settings
 const TEST_MODE = true;
-const DEFAULT_TEST_IMAGE = "/logo.png"; // Use your logo as placeholder for test images
+const DEFAULT_TEST_IMAGE = '/logo.png'; // Use your logo as placeholder for test images
 
 const mainURL = `https://arweave.net/`;
 
@@ -17,7 +17,7 @@ const MyNFTContainer = ({ nft }) => {
         className="w-full h-full ssm:h-max bg-[#272D37]/60 rounded-2xl flex flex-col p-4 sm:h-max cursor-pointer hover:shadow-lg hover:shadow-blue-500/30 transition duration-300"
         onClick={() => {
           router.push({
-            pathname: "/nft-details",
+            pathname: '/nft-details',
             query: nft,
           });
         }}
@@ -34,7 +34,7 @@ const MyNFTContainer = ({ nft }) => {
                 className="bg-[#1E50FF] outline-none border-none py-2 px-4 rounded-xl font-body cursor-pointer transition duration-250 ease-in-out hover:scale-110 hover:drop-shadow-xl hover:shadow-sky-600 w-auto text-sm"
                 onClick={() => {
                   router.push({
-                    pathname: "/nft-details",
+                    pathname: '/nft-details',
                     query: nft,
                   });
                 }}

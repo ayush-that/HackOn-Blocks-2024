@@ -1,9 +1,9 @@
-import React from "react";
-import { useBundler } from "../context/bundlrContext";
+import React from 'react';
+import { useBundler } from '../context/bundlrContext';
 
 const FundWallet = () => {
   const { fundWallet, balance } = useBundler();
-  const [value, setValue] = React.useState("0.005");
+  const [value, setValue] = React.useState('0.005');
 
   return (
     <div className="font-body">

@@ -1,0 +1,17 @@
+# Directories
+node_modules
+.next
+build
+dist
+out
+coverage
+
+# Files
+*.min.js
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Config files
+.env* 

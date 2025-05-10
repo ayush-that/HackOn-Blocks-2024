@@ -1,7 +1,7 @@
-const { ethers } = require("hardhat");
+const { ethers } = require('hardhat');
 
 async function main() {
-  const contractFactory = await ethers.getContractFactory("NFTMarketplace");
+  const contractFactory = await ethers.getContractFactory('NFTMarketplace');
   const contractDeploy = await contractFactory.deploy();
 
   await contractDeploy.deployed();

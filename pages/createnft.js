@@ -1,27 +1,26 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
-import { Footer, FundWallet, Header } from "../components";
-import { useBundler } from "../context/bundlrContext";
-import ContractABI from "../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
-import { toast } from "react-toastify";
-import { ethers } from "ethers";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useRef, useState } from 'react';
+import { Footer, FundWallet, Header } from '../components';
+import { useBundler } from '../context/bundlrContext';
+import ContractABI from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import { toast } from 'react-toastify';
+import { ethers } from 'ethers';
 
 const TEST_MODE = true;
 const mainURL = `https://arweave.net/`;
 
 const Create = () => {
-  const { initialiseBundlr, bundlrInstance, balance, uploadFile, uploadURI } =
-    useBundler();
+  const { initialiseBundlr, bundlrInstance, balance, uploadFile, uploadURI } = useBundler();
 
   const [nftDetails, setNftDetails] = useState({
-    name: "",
-    description: "",
-    price: "",
-    image: "",
+    name: '',
+    description: '',
+    price: '',
+    image: '',
   });
 
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState('');
 
   const [loading, setLoading] = useState(false);
 
@@ -61,14 +60,14 @@ const Create = () => {
 
   const handleUpload = async () => {
     const { name, description, price, image } = nftDetails;
-    if (name === "") {
-      toast.error("Please provide name for NFT");
-    } else if (description === "") {
-      toast.error("Please provide description for NFT");
-    } else if (price === "") {
-      toast.error("Please provide Price");
-    } else if (image === "") {
-      toast.error("Please Select Image");
+    if (name === '') {
+      toast.error('Please provide name for NFT');
+    } else if (description === '') {
+      toast.error('Please provide description for NFT');
+    } else if (price === '') {
+      toast.error('Please provide Price');
+    } else if (image === '') {
+      toast.error('Please Select Image');
     } else {
       setLoading(true);
       const url = await uploadFile(file);
@@ -96,20 +95,20 @@ const Create = () => {
         // In test mode, skip actual contract interaction
         setLoading(false);
         setNftDetails({
-          name: "",
-          description: "",
-          price: "",
-          image: "",
+          name: '',
+          description: '',
+          price: '',
+          image: '',
         });
-        setFile("");
-        toast.success("Test Mode: NFT Minted Successfully");
-        router.push("/dashboard");
+        setFile('');
+        toast.success('Test Mode: NFT Minted Successfully');
+        router.push('/dashboard');
         return;
       }
 
       const contract = await getContract();
 
-      const price = ethers.utils.parseUnits(nftDetails.price, "ether");
+      const price = ethers.utils.parseUnits(nftDetails.price, 'ether');
 
       let listingPrice = await contract.getListingPrice();
       listingPrice = listingPrice.toString();
@@ -122,32 +121,32 @@ const Create = () => {
       setLoading(false);
 
       setNftDetails({
-        name: "",
-        description: "",
-        price: "",
-        image: "",
+        name: '',
+        description: '',
+        price: '',
+        image: '',
       });
 
-      setFile("");
+      setFile('');
 
-      toast.success("Minted Successfully");
+      toast.success('Minted Successfully');
 
-      router.push("/dashboard");
+      router.push('/dashboard');
     } catch (error) {
       console.error(error);
       if (TEST_MODE) {
         setLoading(false);
         setNftDetails({
-          name: "",
-          description: "",
-          price: "",
-          image: "",
+          name: '',
+          description: '',
+          price: '',
+          image: '',
         });
-        setFile("");
-        toast.success("Test Mode: NFT Minted Successfully");
-        router.push("/dashboard");
+        setFile('');
+        toast.success('Test Mode: NFT Minted Successfully');
+        router.push('/dashboard');
       } else {
-        toast.error("Something went wrong", error);
+        toast.error('Something went wrong', error);
         setLoading(false);
       }
     }
@@ -156,9 +155,7 @@ const Create = () => {
   if (!bundlrInstance) {
     return (
       <div className="justify-center items-center h-screen flex font-body flex-col">
-        <h3 className="text-4xl font-bold sm:text-xl">
-          Let&apos;s initialise Bundlr now 💱
-        </h3>
+        <h3 className="text-4xl font-bold sm:text-xl">Let&apos;s initialise Bundlr now 💱</h3>
         <button
           className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-8 py-5 text-center mr-2 mb-2 transition-all ease-in-out delay-150 duration-150
@@ -171,11 +168,7 @@ const Create = () => {
     );
   }
 
-  if (
-    !balance ||
-    (Number(balance) <= 0 && !balance) ||
-    Number(balance) <= 0.0005
-  ) {
+  if (!balance || (Number(balance) <= 0 && !balance) || Number(balance) <= 0.0005) {
     return (
       <div className="flex flex-col items-center justify-center h-screen ">
         <h3 className="text-4xl font-body text-center">
@@ -205,7 +198,7 @@ const Create = () => {
           >
             <input
               id="selectImage"
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               type="file"
               onChange={handleFileChange}
               ref={dataRef}
@@ -221,9 +214,7 @@ const Create = () => {
               </div>
             ) : (
               <div className="h-full flex justify-center items-center">
-                <h2 className="text-center">
-                  Please Select Here to See Your File Preview
-                </h2>
+                <h2 className="text-center">Please Select Here to See Your File Preview</h2>
               </div>
             )}
           </div>
@@ -236,9 +227,7 @@ const Create = () => {
                 className="px-5 py-3 rounded-xl
                placeholder:text-slate-400 outline-none border-none  bg-[#272D37]/60 placeholder:font-body font-body"
                 value={nftDetails.name}
-                onChange={(e) =>
-                  setNftDetails({ ...nftDetails, name: e.target.value })
-                }
+                onChange={(e) => setNftDetails({ ...nftDetails, name: e.target.value })}
               />
             </div>
 
@@ -248,9 +237,7 @@ const Create = () => {
                 placeholder="eg.DesiNFT ka"
                 className="px-5 py-3 rounded-lg placeholder:text-slate-400 bg-[#272D37]/60 border-none outline-none placeholder:font-body tx font-body"
                 value={nftDetails.description}
-                onChange={(e) =>
-                  setNftDetails({ ...nftDetails, description: e.target.value })
-                }
+                onChange={(e) => setNftDetails({ ...nftDetails, description: e.target.value })}
                 rows="10"
               />
             </div>
@@ -263,9 +250,7 @@ const Create = () => {
                 className="px-5 py-3 rounded-xl
                placeholder:text-slate-400 outline-none border-none  bg-[#272D37]/60 placeholder:font-body font-body"
                 value={nftDetails.price}
-                onChange={(e) =>
-                  setNftDetails({ ...nftDetails, price: e.target.value })
-                }
+                onChange={(e) => setNftDetails({ ...nftDetails, price: e.target.value })}
               />
             </div>
             <button
@@ -274,7 +259,7 @@ const Create = () => {
               onClick={handleUpload}
               disabled={loading}
             >
-              {loading ? "Please Wait..." : "Create"}
+              {loading ? 'Please Wait...' : 'Create'}
             </button>
           </div>
         </section>

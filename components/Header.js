@@ -1,8 +1,8 @@
-import { CloseSquare, HambergerMenu } from "iconsax-react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { truncateEthAddress } from "../utils/truncAddress";
+import { CloseSquare, HambergerMenu } from 'iconsax-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { truncateEthAddress } from '../utils/truncAddress';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ const Header = () => {
 
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  const [addr, setAddr] = useState("");
+  const [addr, setAddr] = useState('');
 
   const changeNavbar = () => {
     if (window.scrollY >= 20) {
@@ -22,11 +22,11 @@ const Header = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("scroll", changeNavbar);
+    document.addEventListener('scroll', changeNavbar);
   });
 
   useEffect(() => {
-    const addr = localStorage.getItem("walletAddress");
+    const addr = localStorage.getItem('walletAddress');
     setAddr(addr);
   }, []);
 
@@ -58,9 +58,9 @@ const Header = () => {
               <Link href="/dashboard">
                 <a
                   className={
-                    currentRoute === "/dashboard"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/dashboard'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Home
@@ -71,9 +71,9 @@ const Header = () => {
               <Link href="/createnft">
                 <a
                   className={
-                    currentRoute === "/createnft"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/createnft'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Create NFTs
@@ -84,9 +84,9 @@ const Header = () => {
               <Link href="/profile">
                 <a
                   className={
-                    currentRoute === "/profile"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/profile'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Profile
@@ -130,9 +130,9 @@ const Header = () => {
               <Link href="/dashboard">
                 <a
                   className={
-                    currentRoute === "/dashboard"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/dashboard'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Home
@@ -143,9 +143,9 @@ const Header = () => {
               <Link href="/createnft">
                 <a
                   className={
-                    currentRoute === "/createnft"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/createnft'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Create NFTs
@@ -156,9 +156,9 @@ const Header = () => {
               <Link href="/profile">
                 <a
                   className={
-                    currentRoute === "/profile"
-                      ? "text-white text-base font-medium"
-                      : "text-gray-500 font-normal hover:text-white"
+                    currentRoute === '/profile'
+                      ? 'text-white text-base font-medium'
+                      : 'text-gray-500 font-normal hover:text-white'
                   }
                 >
                   Profile

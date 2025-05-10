@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { Footer, Header, MyNFTContainer } from "../components";
-import ContractABI from "../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
-import { ethers } from "ethers";
-import axios from "axios";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { Footer, Header, MyNFTContainer } from '../components';
+import ContractABI from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import { ethers } from 'ethers';
+import axios from 'axios';
 
 const TEST_MODE = true;
 const mainURL = `https://arweave.net/`;
@@ -38,25 +38,27 @@ const Profile = () => {
         // In test mode, create mock owned NFTs
         const mockNfts = [
           {
-            price: "0.1",
+            price: '0.1',
             tokenId: 3,
-            seller: "0x0000000000000000000000000000000000000000",
-            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            image: "test-image-3",
-            name: "My Test NFT 1",
-            description: "This is my test NFT in test mode",
-            tokenURI: "test-uri-3",
+            seller: '0x0000000000000000000000000000000000000000',
+            owner:
+              localStorage.getItem('walletAddress') || '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            image: 'test-image-3',
+            name: 'My Test NFT 1',
+            description: 'This is my test NFT in test mode',
+            tokenURI: 'test-uri-3',
           },
           {
-            price: "0.3",
+            price: '0.3',
             tokenId: 4,
-            seller: "0x0000000000000000000000000000000000000000",
-            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            image: "test-image-4",
-            name: "My Test NFT 2",
-            description: "Another one of my test NFTs in test mode",
-            tokenURI: "test-uri-4",
-          }
+            seller: '0x0000000000000000000000000000000000000000',
+            owner:
+              localStorage.getItem('walletAddress') || '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            image: 'test-image-4',
+            name: 'My Test NFT 2',
+            description: 'Another one of my test NFTs in test mode',
+            tokenURI: 'test-uri-4',
+          },
         ];
         setNts(mockNfts);
         setLoading(true);
@@ -73,7 +75,7 @@ const Profile = () => {
 
           const meta = await axios.get(mainURL + tokenURI);
 
-          let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+          let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
 
           let item = {
             price,
@@ -95,20 +97,21 @@ const Profile = () => {
       if (TEST_MODE) {
         const mockNfts = [
           {
-            price: "0.1",
+            price: '0.1',
             tokenId: 3,
-            seller: "0x0000000000000000000000000000000000000000",
-            owner: localStorage.getItem("walletAddress") || "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            image: "test-image-3",
-            name: "My Test NFT 1",
-            description: "This is my test NFT in test mode",
-            tokenURI: "test-uri-3",
-          }
+            seller: '0x0000000000000000000000000000000000000000',
+            owner:
+              localStorage.getItem('walletAddress') || '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            image: 'test-image-3',
+            name: 'My Test NFT 1',
+            description: 'This is my test NFT in test mode',
+            tokenURI: 'test-uri-3',
+          },
         ];
         setNts(mockNfts);
         setLoading(true);
       } else {
-        toast.error("Something went wrong", error);
+        toast.error('Something went wrong', error);
       }
     }
   };
@@ -127,9 +130,7 @@ const Profile = () => {
         <section className="">
           <div className="max-w-[1400px] relative h-[180px] mx-auto my-0 bg-[#272D37]/60 rounded-2xl border-3 border-solid border-[#0039FF] sm:h-[150px] md:mx-2 mb-20">
             <div className="flex items-center justify-center w-full h-full">
-              <h1 className="font-body font-semibold text-5xl md:text-2xl">
-                My NFTs
-              </h1>
+              <h1 className="font-body font-semibold text-5xl md:text-2xl">My NFTs</h1>
             </div>
           </div>
         </section>

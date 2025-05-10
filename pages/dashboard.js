@@ -1,15 +1,15 @@
-import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import { Footer, Header } from "../components";
-import ContractABI from "../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { ethers } from "ethers";
-import { truncateEthAddress } from "../utils/truncAddress";
-import { useRouter } from "next/router";
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
+import { Footer, Header } from '../components';
+import ContractABI from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { ethers } from 'ethers';
+import { truncateEthAddress } from '../utils/truncAddress';
+import { useRouter } from 'next/router';
 
 const TEST_MODE = true;
-const DEFAULT_TEST_IMAGE = "/logo.png";
+const DEFAULT_TEST_IMAGE = '/logo.png';
 const mainURL = `https://arweave.net/`;
 
 const Dashboard = () => {
@@ -34,25 +34,25 @@ const Dashboard = () => {
       if (TEST_MODE) {
         const mockNfts = [
           {
-            price: "0.1",
+            price: '0.1',
             tokenId: 1,
-            seller: "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            owner: "0x0000000000000000000000000000000000000000",
-            image: "test-image-1",
-            name: "Test NFT 1",
-            description: "This is a test NFT in test mode",
-            tokenURI: "test-uri-1",
+            seller: '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            owner: '0x0000000000000000000000000000000000000000',
+            image: 'test-image-1',
+            name: 'Test NFT 1',
+            description: 'This is a test NFT in test mode',
+            tokenURI: 'test-uri-1',
           },
           {
-            price: "0.2",
+            price: '0.2',
             tokenId: 2,
-            seller: "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            owner: "0x0000000000000000000000000000000000000000",
-            image: "test-image-2",
-            name: "Test NFT 2",
-            description: "Another test NFT in test mode",
-            tokenURI: "test-uri-2",
-          }
+            seller: '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            owner: '0x0000000000000000000000000000000000000000',
+            image: 'test-image-2',
+            name: 'Test NFT 2',
+            description: 'Another test NFT in test mode',
+            tokenURI: 'test-uri-2',
+          },
         ];
         setNts(mockNfts);
         setLoading(true);
@@ -67,7 +67,7 @@ const Dashboard = () => {
         data?.map(async (i) => {
           const tokenURI = await contract.tokenURI(i.tokenId);
           const meta = await axios.get(mainURL + tokenURI);
-          let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+          let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
 
           let item = {
             price,
@@ -86,19 +86,19 @@ const Dashboard = () => {
       setLoading(true);
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong");
+      toast.error('Something went wrong');
       if (!TEST_MODE) {
         const mockNfts = [
           {
-            price: "0.1",
+            price: '0.1',
             tokenId: 1,
-            seller: "0x796946405d715e384CA5D87a73E79C44aC8acbB7",
-            owner: "0x0000000000000000000000000000000000000000",
-            image: "test-image-1",
-            name: "Test NFT 1",
-            description: "This is a test NFT in fallback mode",
-            tokenURI: "test-uri-1",
-          }
+            seller: '0x796946405d715e384CA5D87a73E79C44aC8acbB7',
+            owner: '0x0000000000000000000000000000000000000000',
+            image: 'test-image-1',
+            name: 'Test NFT 1',
+            description: 'This is a test NFT in fallback mode',
+            tokenURI: 'test-uri-1',
+          },
         ];
         setNts(mockNfts);
         setLoading(true);
@@ -140,14 +140,16 @@ const Dashboard = () => {
                   className="w-full h-full ssm:h-max bg-[#272D37]/60 rounded-2xl flex flex-col p-4 sm:h-max cursor-pointer hover:shadow-lg hover:shadow-blue-500/30 transition duration-300"
                   onClick={() => {
                     router.push({
-                      pathname: "/nft-details",
+                      pathname: '/nft-details',
                       query: nft,
                     });
                   }}
                 >
                   <div className="relative transition duration-150 ease-in-out delay-150">
                     <img
-                      src={nft.image?.startsWith('test-') ? DEFAULT_TEST_IMAGE : mainURL + nft?.image}
+                      src={
+                        nft.image?.startsWith('test-') ? DEFAULT_TEST_IMAGE : mainURL + nft?.image
+                      }
                       alt="mock"
                       className="w-full h-[220px] object-cover rounded-xl"
                     />
@@ -157,7 +159,7 @@ const Dashboard = () => {
                           className="bg-[#1E50FF] outline-none border-none py-2 px-4 rounded-xl font-body cursor-pointer transition duration-250 ease-in-out hover:scale-110 hover:drop-shadow-xl hover:shadow-sky-600 w-auto text-sm"
                           onClick={() => {
                             router.push({
-                              pathname: "/nft-details",
+                              pathname: '/nft-details',
                               query: nft,
                             });
                           }}
@@ -171,9 +173,7 @@ const Dashboard = () => {
                     <h1 className="text-lg font-semibold truncate">{nft.name}</h1>
                     <div className="flex justify-between mt-2">
                       <div>
-                        <p className="my-1 text-xs text-[#8F9CA9]">
-                          Creator
-                        </p>
+                        <p className="my-1 text-xs text-[#8F9CA9]">Creator</p>
                         <h4 className="my-0 text-xs text-transparent font-bold bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">
                           {truncateEthAddress(nft.seller)}
                         </h4>
